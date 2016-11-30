@@ -2,7 +2,6 @@ package spittr;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import java.nio.charset.Charset;
 import java.util.Date;
 
 public class Spittle {
@@ -71,7 +70,7 @@ public class Spittle {
     }
 
     public void setMessage(String message) {
-        this.message = new String(message.getBytes(Charset.forName("UTF-8")));
+        this.message = message;
     }
 
     public void setTime(Date time) {
