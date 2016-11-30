@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="soundsystem.SpEL">
+        <property name="myInt" value="#{1}" />
+        <property name="currentTime" value="#{T(System).currentTimeMillis()}" />
+        <property name="artistName" value="#{artistSelector.selectArtist()?.toUpperCase()}" />
+        <property name="discTitle" value="#{systemProperties['disc.title']}" />
+        <property name="pi" value="#{3.1415}" />
+        <property name="anotherFloat" value="#{9.87E4}" />
+        <property name="hello" value="#{'Hello'}" />
+        <property name="myBool" value="false" />
+    </bean>
+
+    <bean id="circle" class="shapes.Circle">
+        <property name="radius" value="12" />
+    </bean>
+
+    <bean class="shapes.AnotherCircle">
+        <property name="length" value="#{2 * T(java.lang.Math).PI * circle.radius}" />
+        <property name="square" value="#{T(java.lang.Math).PI * circle.radius ^ 2}" />
+    </bean>
+</beans>

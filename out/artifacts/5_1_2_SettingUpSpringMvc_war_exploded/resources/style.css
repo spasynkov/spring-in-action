@@ -1,0 +1,26 @@
+label.error {
+    text-decoration: line-through;
+}
+input.error {
+    background-color: rgba(255, 0, 0, 0.16);
+}
+span.error {
+    color: red;
+}
+div.error {
+    background-color: #ffcccc;
+    border: 2px solid red;
+    padding: 2px;
+    width: 30%;
+}
+
+#map {
+    visibility: hidden;
+    height: 50%;
+    width: 50%;
+    float: right;
+}
+
+#footer {
+    clear: both;
+}

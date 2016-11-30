@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/beans/spring-util.xsd">
+
+    <bean id="compactDisc" class="soundsystem.SgtPeppers"
+          c:title="Sgt. Pepper's Lonely Hearts Club Band"
+          c:artist="The Beatles" />
+
+    <bean id="anotherCompactDisc" class="soundsystem.SgtPeppers">
+        <constructor-arg name="title" value="Sgt. Pepper's Lonely Hearts Club Band" />
+        <constructor-arg name="artist" value="The Beatles" />
+    </bean>
+
+    <bean class="soundsystem.CDPlayer">
+        <constructor-arg ref="compactDisc" />
+    </bean>
+
+    <!-- injecting reference by variable name in constructor's arguments using c-namespace -->
+    <bean class="soundsystem.CDPlayer"
+          c:cd-ref="anotherCompactDisc" />
+
+    <!-- injecting reference by variable index in constructor's arguments using c-namespace -->
+    <bean class="soundsystem.CDPlayer"
+          c:_0-ref="compactDisc" />
+
+    <!-- injecting reference for constructor with only one argument using c-namespace (not compiles)
+    <bean class="soundsystem.CDPlayer"
+          c:_-ref="compactDisc" />
+
+          -->
+
+    <bean class="soundsystem.BlankDisc">
+        <constructor-arg name="title" value="Sgt. Pepper's Lonely Hearts Club Band" />
+        <constructor-arg name="artist" value="The Beatles" />
+        <constructor-arg name="songs">
+            <list>
+                <value>Sgt. Pepper's Lonely Hearts Club Band</value>
+                <value>With a Little Help from My Friends</value>
+                <value>Lucy in the Sky with Diamonds</value>
+                <value>Getting Better</value>
+                <value>Fixing a Hole</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean class="soundsystem.Discography">
+        <constructor-arg name="artist" value="The Beatles" />
+        <constructor-arg name="discs">
+            <list>
+                <ref bean="compactDisc" />
+                <ref bean="anotherCompactDisc" />
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean class="soundsystem.CDPlayer">
+        <constructor-arg ref="compactDisc" />
+        <property name="cd" ref="anotherCompactDisc" />
+    </bean>
+
+    <bean class="soundsystem.CDPlayer" p:cd-ref="compactDisc">
+        <constructor-arg ref="anotherCompactDisc" />
+    </bean>
+
+    <util:list id="trackList">
+        <value>Sgt. Pepper's Lonely Hearts Club Band</value>
+        <value>With a Little Help from My Friends</value>
+        <value>Lucy in the Sky with Diamonds</value>
+        <value>Getting Better</value>
+        <value>Fixing a Hole</value>
+    </util:list>
+
+    <bean class="soundsystem.BlankDisc">
+        <constructor-arg name="artist" value="1" />
+        <constructor-arg name="title" value="2" />
+        <constructor-arg name="songs" ref="trackList" />
+    </bean>
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+">
+
+    <bean id="disc" class="soundsystem.BlankDisc">
+        <property name="artist" value="The Beatles" />
+        <property name="title" value="Sgt. Pepper's Lonely Hearts Club Band" />
+        <property name="tracks">
+            <list>
+                <value>Sgt. Pepper's Lonely Hearts Club Band</value>
+                <value>With a Little Help from My Friends</value>
+                <value>Lucy in the Sky with Diamonds</value>
+                <value>Getting Better</value>
+                <value>Fixing a Hole</value>
+                <value>Fixing a Hole6</value>
+                <value>Fixing a Hole7</value>
+                <value>Fixing a Hole8</value>
+                <value>Fixing a Hole9</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="trackCounter" class="soundsystem.TrackCounter" />
+
+    <aop:config>
+        <aop:aspect ref="trackCounter">
+            <aop:before method="countTrack"
+                        pointcut="execution(* soundsystem.CompactDisc.play(int)) and args(trackNumber)" />
+        </aop:aspect>
+    </aop:config>
+</beans>
