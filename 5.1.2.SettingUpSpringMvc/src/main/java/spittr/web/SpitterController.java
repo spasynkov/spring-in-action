@@ -7,6 +7,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import spittr.Spitter;
 import spittr.data.SpitterRepository;
 import spittr.exceptions.SpitterNotFoundException;
@@ -38,7 +39,7 @@ public class SpitterController {
 
     @RequestMapping(value = "/register", method = POST)
     public String processRegistration(
-            Model model,
+            RedirectAttributes model,
             @RequestPart("profilePicture") Part profilePicture,
             @Valid Spitter spitter,
             Errors errors) {
@@ -61,6 +62,7 @@ public class SpitterController {
 
         spitterRepository.save(spitter);
         model.addAttribute("username", spitter.getUsername());
+        model.addFlashAttribute("spitter", spitter);
         return "redirect:/spitter/{username}";
     }
 
@@ -69,9 +71,11 @@ public class SpitterController {
             Model model,
             @PathVariable String username) {
 
-        Spitter spitter = spitterRepository.findByUsername(username);
-        if (spitter == null) throw new SpitterNotFoundException(username);
-        model.addAttribute(spitter);
+        if (!model.containsAttribute("spitter")) {
+            Spitter spitter = spitterRepository.findByUsername(username);
+            if (spitter == null) throw new SpitterNotFoundException(username);
+                model.addAttribute(spitter);
+        }
         return "profile";
     }
 }
