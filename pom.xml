@@ -28,6 +28,8 @@
         <module>4.4.4.IntroducingAspectsXmlConcert</module>
         <module>4.5.InjectingAspectjAspectsConcert</module>
         <module>5.1.2.SettingUpSpringMvc</module>
+        <module>8.WebFlows pizza</module>
+        <module>9.SpringSecurity spitter</module>
     </modules>
 
     <properties>

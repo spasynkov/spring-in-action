@@ -73,8 +73,9 @@ public class SpitterController {
 
         if (!model.containsAttribute("spitter")) {
             Spitter spitter = spitterRepository.findByUsername(username);
-            if (spitter == null) throw new SpitterNotFoundException(username);
-                model.addAttribute(spitter);
+            if (spitter == null)
+                throw new SpitterNotFoundException(username);
+            model.addAttribute(spitter);
         }
         return "profile";
     }
