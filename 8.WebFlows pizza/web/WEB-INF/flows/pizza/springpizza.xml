@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+      start-state="identifyCustomer"> <!-- Explicitly identifying starting state -->
+
+    <var name="order" class="com.springinaction.pizza.domain.Order" />
+
+    <!-- Call customer subflow -->
+    <subflow-state id="identifyCustomer" subflow="customer">
+        <output name="customer" value="order.customer" />
+        <transition on="customerReady" to="buildOrder" />
+    </subflow-state>
+
+    <!-- Call order subflow -->
+    <subflow-state id="buildOrder" subflow="order">
+        <input name="order" value="order" />
+        <transition on="orderCreated" to="takePayment" />
+    </subflow-state>
+
+    <!-- Call payment subflow -->
+    <subflow-state id="takePayment" subflow="payment">
+        <input name="order" value="order" />
+        <transition on="paymentTaken" to="saveOrder" />
+    </subflow-state>
+
+    <!-- Save order -->
+    <action-state id="saveOrder">
+        <evaluate expression="pizzaFlowActions.saveOrder(order)" />
+        <transition to="thankCustomer" />
+    </action-state>
+
+    <!-- Thank customer -->
+    <view-state id="thankCustomer">
+        <transition to="endState" />
+    </view-state>
+
+    <end-state id="endState" />
+
+    <!-- Global cancel transition -->
+    <global-transitions>
+        <transition on="cancel" to="endState" />
+    </global-transitions>
+</flow>

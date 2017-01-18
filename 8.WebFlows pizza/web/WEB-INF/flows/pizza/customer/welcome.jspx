@@ -1,0 +1,18 @@
+<html xmlns:jsp="http://java.sun.com/JSP/Page"
+      xmlns:form="http://www.springframework.org/tags/form">
+<jsp:output omit-xml-declaration="yes"/>
+<jsp:directive.page contentType="text/html;charset=UTF-8" />
+<head><title>Spizza</title></head>
+<body>
+<h2>Welcome to Spizza!!!</h2>
+<form:form>
+    <input type="hidden" name="_flowExecutionKey"
+           value="${flowExecutionKey}"/><!-- Flow execution key -->
+    <input type="text" name="phoneNumber"/><br/>
+    <input type="submit" name="_eventId_phoneEntered"
+           value="Lookup Customer" /><!-- Fire phoneEntered event -->
+    <!-- _eventId_ tells SpringWebFlow that event with the following name (phoneEntered) is fired -->
+    <input type="cancel" name="_eventId_cancel" value="Cancel" />
+</form:form>
+</body>
+</html>
