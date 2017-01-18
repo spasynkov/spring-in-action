@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 
 @Configuration
-@EnableWebMvcSecurity
+@EnableWebSecurity
 public class SecurityWebInitializer extends WebSecurityConfigurerAdapter {
 
     /*
@@ -28,12 +28,12 @@ public class SecurityWebInitializer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/spitter/me").hasRole("SPITTER")      // only registered users can see their page
+                    //.antMatchers("/spitter/me").hasRole("SPITTER")      // only registered users can see their page
                     .antMatchers(HttpMethod.POST, "/spittles").hasRole("SPITTER")   // only registered users could post spittles
                     .anyRequest().permitAll()                           // other requests are free
 
-                .and()
-                .requiresChannel().antMatchers("/").requiresSecure()    // enabling https on all requests
+                /*.and()
+                .requiresChannel().antMatchers("**").requiresSecure()    // enabling https on all requests*/
 
                 .and()
                 .formLogin()

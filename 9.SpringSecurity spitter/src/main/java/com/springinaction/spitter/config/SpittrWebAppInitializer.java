@@ -13,7 +13,7 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
     }
 
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[] {RootConfig.class};
+        return new Class<?>[] {RootConfig.class, SecurityWebInitializer.class};
     }
 
     protected Class<?>[] getServletConfigClasses() {
