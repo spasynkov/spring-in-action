@@ -45,7 +45,6 @@ public class SpitterController {
             Errors errors) {
 
         if (errors.hasErrors()) {
-            model.addAttribute(spitter);
             return "registerForm";
         }
 
