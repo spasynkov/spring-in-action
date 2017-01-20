@@ -28,12 +28,13 @@ public class SecurityWebInitializer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    //.antMatchers("/spitter/me").hasRole("SPITTER")      // only registered users can see their page
+                    .antMatchers("/spitter/me").hasRole("SPITTER")      // only registered users can see their page
+                    .antMatchers("/spittles/add").hasRole("SPITTER")
                     .antMatchers(HttpMethod.POST, "/spittles").hasRole("SPITTER")   // only registered users could post spittles
                     .anyRequest().permitAll()                           // other requests are free
 
-                /*.and()
-                .requiresChannel().antMatchers("**").requiresSecure()    // enabling https on all requests*/
+                //.and()
+                //.requiresChannel().antMatchers("**").requiresSecure()    // enabling https on all requests
 
                 .and()
                 .formLogin()
