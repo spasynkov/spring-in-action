@@ -10,7 +10,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Part;
 import javax.validation.Valid;
@@ -39,7 +38,8 @@ public class SpitterController {
 
     @RequestMapping(value = "/register", method = POST)
     public String processRegistration(
-            RedirectAttributes model,
+            // RedirectAttributes model,
+            Model model,
             @RequestPart("profilePicture") Part profilePicture,
             @Valid Spitter spitter,
             Errors errors) {
@@ -62,7 +62,7 @@ public class SpitterController {
 
         spitterRepository.save(spitter);
         model.addAttribute("username", spitter.getUsername());
-        model.addFlashAttribute("spitter", spitter);
+        // model.addFlashAttribute("spitter", spitter);
         return "redirect:/spitter/{username}";
     }
 
