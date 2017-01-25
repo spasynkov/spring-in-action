@@ -40,7 +40,12 @@ public class SecurityWebInitializer extends WebSecurityConfigurerAdapter {
                 .formLogin()
 
                 .and()
-                .httpBasic();
+                .httpBasic()
+
+                .and()
+                .rememberMe()
+                    .tokenValiditySeconds(2419200)  // 4 weeks
+                    .key("spittrKey");
     }
 
     @Override
