@@ -30,6 +30,7 @@
         <module>5.1.2.SettingUpSpringMvc</module>
         <module>8.WebFlows pizza</module>
         <module>9.SpringSecurity spitter</module>
+        <module>10.Database spittr</module>
     </modules>
 
     <properties>
