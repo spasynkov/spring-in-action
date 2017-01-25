@@ -1,6 +1,6 @@
 package com.springinaction.spitter.data;
 
-import com.springinaction.spitter.Spittle;
+import com.springinaction.spitter.domain.Spittle;
 import com.springinaction.spitter.exceptions.DuplicateSpittleException;
 
 import java.util.List;

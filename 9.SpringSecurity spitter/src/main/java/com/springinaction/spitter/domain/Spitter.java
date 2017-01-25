@@ -1,4 +1,4 @@
-package com.springinaction.spitter;
+package com.springinaction.spitter.domain;
 
 import org.hibernate.validator.constraints.Email;
 

@@ -1,6 +1,6 @@
 package com.springinaction.spitter.data;
 
-import com.springinaction.spitter.Spitter;
+import com.springinaction.spitter.domain.Spitter;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

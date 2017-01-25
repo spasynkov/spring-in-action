@@ -1,7 +1,7 @@
 package com.springinaction.spitter.security;
 
-import com.springinaction.spitter.Spitter;
 import com.springinaction.spitter.data.SpitterRepository;
+import com.springinaction.spitter.domain.Spitter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

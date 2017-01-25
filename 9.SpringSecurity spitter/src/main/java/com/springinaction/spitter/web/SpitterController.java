@@ -1,7 +1,7 @@
 package com.springinaction.spitter.web;
 
-import com.springinaction.spitter.Spitter;
 import com.springinaction.spitter.data.SpitterRepository;
+import com.springinaction.spitter.domain.Spitter;
 import com.springinaction.spitter.exceptions.SpitterNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

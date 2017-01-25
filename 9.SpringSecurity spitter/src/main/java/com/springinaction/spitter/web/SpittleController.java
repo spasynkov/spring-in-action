@@ -1,7 +1,7 @@
 package com.springinaction.spitter.web;
 
-import com.springinaction.spitter.Spittle;
 import com.springinaction.spitter.data.SpittleRepository;
+import com.springinaction.spitter.domain.Spittle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
