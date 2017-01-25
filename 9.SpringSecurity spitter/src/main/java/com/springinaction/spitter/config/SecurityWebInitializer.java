@@ -45,7 +45,11 @@ public class SecurityWebInitializer extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe()
                     .tokenValiditySeconds(2419200)  // 4 weeks
-                    .key("spittrKey");
+                    .key("spittrKey")
+
+                .and()
+                .logout()
+                    .logoutSuccessUrl("/");
     }
 
     @Override
