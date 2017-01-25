@@ -1,3 +1,19 @@
+#content {
+    clear: both;
+}
+
+#footer {
+    clear: both;
+}
+
+#logo {
+    float: left;
+}
+
+#loginLinks {
+    float: right;
+}
+
 label.error {
     text-decoration: line-through;
 }
@@ -19,8 +35,4 @@ div.error {
     height: 50%;
     width: 50%;
     float: right;
-}
-
-#footer {
-    clear: both;
 }
