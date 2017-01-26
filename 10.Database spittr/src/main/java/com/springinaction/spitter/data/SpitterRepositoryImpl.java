@@ -46,6 +46,23 @@ public class SpitterRepositoryImpl implements SpitterRepository {
         return jdbcOperations.queryForObject(SELECT_SPITTER_BY_USERNAME, this::mapRow, username);
     }
 
+    /*
+    public void addSpitter(Spitter spitter) {
+        String insertSpitter = "insert into spitter " +
+                "(username, password, firstname, lastname, email) " +
+                "VALUES (:username, :password, :firstname, :lastname, :email);";
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("username", spitter.getUsername());
+        paramMap.put("password", spitter.getPassword());
+        paramMap.put("firstname", spitter.getFirstName());
+        paramMap.put("lastname", spitter.getLastName());
+        paramMap.put("email", spitter.getEmail());
+
+        jdbcOperations.update(insertSpitter, paramMap);
+    }
+    */
+
     private Spitter mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Spitter(
                 rs.getLong("id"),
