@@ -31,10 +31,13 @@
         <module>8.WebFlows pizza</module>
         <module>9.SpringSecurity spitter</module>
         <module>10.Database spittr</module>
+        <module>11.ORM spittr</module>
     </modules>
 
     <properties>
         <spring-version>4.3.3.RELEASE</spring-version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencies>
