@@ -36,15 +36,16 @@ public class Spitter {
     }
 
     public Spitter(String username, String password, String firstName, String lastName) {
-        this(null, username, password, firstName, lastName);
+        this(null, username, password, firstName, lastName, "");
     }
 
-    public Spitter(Long id, String username, String password, String firstName, String lastName) {
+    public Spitter(Long id, String username, String password, String firstName, String lastName, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
     }
 
     public Long getId() {
