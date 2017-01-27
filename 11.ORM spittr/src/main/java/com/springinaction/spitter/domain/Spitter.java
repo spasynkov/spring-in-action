@@ -2,30 +2,41 @@ package com.springinaction.spitter.domain;
 
 import org.hibernate.validator.constraints.Email;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "spitter")
 public class Spitter {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "Username should not be null")
     @Size(min = 5, max = 16, message = "Username should consist from 5 to 16 characters")
+    @Column(name = "username")
     private String username;
 
     @NotNull(message = "Password should not be null")
     @Size(min = 5, max = 25, message = "Password should consist from 5 to 25 characters")
+    @Column(name = "password")
     private String password;
 
     @NotNull(message = "First name should not be null")
     @Size(min = 2, max = 30, message = "First name should consist from 2 to 30 characters")
+    @Column(name = "firstname")
     private String firstName;
 
     @NotNull(message = "Last name should not be null")
     @Size(min = 2, max = 30, message = "Last name should consist from 2 to 30 characters")
+    @Column(name = "lastname")
     private String lastName;
 
     @NotNull
     @Email(message = "{email.valid}")
+    @Column(name = "email")
     private String email;
 
     public Spitter() {

@@ -1,14 +1,21 @@
 package com.springinaction.spitter.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
+import java.util.Properties;
 
 @Configuration
+@EnableTransactionManagement
 public class DatabaseConfig {
     @Bean
     public DataSource dataSource() throws PropertyVetoException {
@@ -25,15 +32,29 @@ public class DatabaseConfig {
         return dataSource;
     }
 
-    @Bean
-    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
+    @Bean   // setting hibernate
+    public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
+        LocalSessionFactoryBean bean = new LocalSessionFactoryBean();
+        bean.setDataSource(dataSource);
+        bean.setPackagesToScan("com.springinaction.spitter.domain");
+
+        Properties properties = new Properties();
+        properties.setProperty("dialect", "org.hibernate.dialect.MySQL5Dialect");
+        bean.setHibernateProperties(properties);
+
+        return bean;
     }
 
-    /*
-    @Bean       // for using named parameters in templates
-    public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource dataSource) {
-        return new NamedParameterJdbcTemplate(dataSource);
+    @Bean
+    public HibernateTransactionManager transactionManager(DataSource dataSource, SessionFactory sessionFactory) {
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setDataSource(dataSource);
+        transactionManager.setSessionFactory(sessionFactory);
+        return transactionManager;
     }
-    */
+
+    @Bean   // translating hibernate's exceptions into spring's ones
+    public BeanPostProcessor persistenceTranslation() {
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
 }
