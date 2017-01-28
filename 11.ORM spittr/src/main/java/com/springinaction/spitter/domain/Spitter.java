@@ -15,22 +15,22 @@ public class Spitter {
     private Long id;
 
     @NotNull(message = "Username should not be null")
-    @Size(min = 5, max = 16, message = "Username should consist from 5 to 16 characters")
+    @Size(min = 5, max = 16, message = "{username.size}")
     @Column(name = "username")
     private String username;
 
     @NotNull(message = "Password should not be null")
-    @Size(min = 5, max = 25, message = "Password should consist from 5 to 25 characters")
+    @Size(min = 5, max = 25, message = "{password.size}")
     @Column(name = "password")
     private String password;
 
     @NotNull(message = "First name should not be null")
-    @Size(min = 2, max = 30, message = "First name should consist from 2 to 30 characters")
+    @Size(min = 2, max = 30, message = "{firstName.size}")
     @Column(name = "firstname")
     private String firstName;
 
     @NotNull(message = "Last name should not be null")
-    @Size(min = 2, max = 30, message = "Last name should consist from 2 to 30 characters")
+    @Size(min = 2, max = 30, message = "{lastName.size}")
     @Column(name = "lastname")
     private String lastName;
 

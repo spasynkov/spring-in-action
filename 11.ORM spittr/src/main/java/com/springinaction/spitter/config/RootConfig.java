@@ -25,8 +25,8 @@ public class RootConfig {
     MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasenames(
-                "/WEB-INF/resourceBundles/stringsInViews",
-                "/WEB-INF/resourceBundles/ValidationMessages"
+                "classpath:/resourceBundles/stringsInViews",
+                "classpath:/resourceBundles/ValidationMessages.properties"
         );
         return messageSource;
     }
