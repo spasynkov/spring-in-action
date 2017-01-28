@@ -1,9 +1,11 @@
 package com.springinaction.spitter.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -18,14 +20,30 @@ import java.beans.PropertyVetoException;
 
 @Configuration
 @EnableTransactionManagement
+@PropertySource("/WEB-INF/database.properties")
 public class DatabaseConfig {
+    @Value("${db.driver}")
+    private String dbDriver;
+
+    @Value("${db.url}")
+    private String dbUrl;
+
+    @Value("${db.user}")
+    private String dbUser;
+
+    @Value("${db.password}")
+    private String dbPassword;
+
+    @Value("${db.dialect}")
+    private String dbDialect;
+
     @Bean
     public DataSource dataSource() throws PropertyVetoException {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
-        dataSource.setDriverClass("com.mysql.jdbc.Driver");
-        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/springinaction-spittr?useSSL=false");
-        dataSource.setUser("spittr");
-        dataSource.setPassword("123123123");
+        dataSource.setDriverClass(dbDriver);
+        dataSource.setJdbcUrl(dbUrl);
+        dataSource.setUser(dbUser);
+        dataSource.setPassword(dbPassword);
 
         dataSource.setMinPoolSize(5);
         dataSource.setAcquireIncrement(5);
@@ -68,7 +86,7 @@ public class DatabaseConfig {
         adapter.setDatabase(Database.MYSQL);
         adapter.setShowSql(true);
         adapter.setGenerateDdl(false);
-        adapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
+        adapter.setDatabasePlatform(dbDialect);
         return adapter;
     }
 
